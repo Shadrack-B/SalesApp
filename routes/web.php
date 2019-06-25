@@ -22,7 +22,10 @@ Route::get('profile', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::put('add/team_member', 'TeamController@add');
+
 Route::resource('team', 'TeamController');
 Route::resource('sales', 'SalesController');
 
-
+Route::get('show/team', 'TeamController@show');
+Route::get('menu', 'TeamController@menu');

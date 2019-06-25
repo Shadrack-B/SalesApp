@@ -15,9 +15,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $user=auth()->user();
+        $teams=auth()->user()->teams()->get();
         $users=User::whereNull('user_type_id')->get();
-        return view('team/index', compact('user', 'users'));
+        return view('team.edit', compact('teams', 'users'));
         
     }
 
@@ -63,16 +63,20 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function menu()
     {
         $user=auth()->user();
-        // $parents=$user->children->name;
-        // $sales=Sales::all();
-        // $commission=Commission::all();
+        $teams=auth()->user()->teams;
         
-        return view('team.show', compact('user'))
-        // ->with('user', $user)->with('users', $users)
+        return view('team/manager/menu', compact('user', 'teams'))
         ;
+    }
+    public function show($id=null)
+    {
+        $user=auth()->user();
+        
+        return view('team/manager/manager', compact('user'));
     }
 
     /**
@@ -82,43 +86,40 @@ class TeamController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $user=auth()->user();
-        $teams=$user->teams()->get();
-        // dd($teams);
-        // $teams=Team::
-        return view('team.edit', compact('user', 'teams'));
+    {   
+        
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+    
+     public function add(Request $request)
+     {
         $this->validate($request,[
             'user_type_id'=>'required',
+            'user_id'=>'required',
         ]);
-        $user=auth()->user();   
-        $users = User::find($id);
+        
+        $users = User::find($request->input('user_id'));
+        $users->user_type_id= $request->input('user_type_id');
+        $users->parent_id=auth()->user()->id;
+        $users->save();
         $team_members = new Team_member;
-        $team=$user->teams()->first();
+    
         // dd($team);
-        if ($user->id==1) {
-            $team_members->team_id=$request->input('id');
+        if (auth()->user()->user_type_id==1) {
+            $team_members->team_id=$request->input('team_id');
         } else {
-            $team_members->team_id=$team->id;
+            $team_members->team_id=auth()->user()->teams()->first()->id;
         }
         
         
         $team_members->user_id=$users->id;
         $team_members->save();
-        $users->user_type_id= $request->input('user_type_id');
-        $users->parent_id=$user->id;
-        $users->save();
+        
         return redirect('team')->with('success', 'Team member successfully added');
+     }
+
+    public function update(Request $request, $id)
+    {
+        // 
     }
 
     /**

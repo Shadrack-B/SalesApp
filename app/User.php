@@ -42,10 +42,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany('App\Team', 'team_members');
     }
-    // public function sales(){
-    //     // dd($this->id);
-    //     return $this->hasMany('App\Sales', 'user_id');
-    // }
+    public function sales(){
+        // dd($this->id);
+        return $this->hasMany('App\Sale', 'user_id');
+    }
 
     public function children(){
         return $this->hasMany('App\User', 'parent_id');
