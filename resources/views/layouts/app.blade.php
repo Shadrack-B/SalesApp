@@ -33,7 +33,7 @@
             tr:nth-child(even) {
               background-color: #dddddd;
             }
-            </style>
+    </style>
 
 
     <!-- Styles -->
@@ -63,7 +63,7 @@
                             <a class="nav-link" href="{{ url('team') }}">{{ __('Create New Member') }}</a>   
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('team/$user->id')}}">My team</a>
+                            <a class="nav-link" href="{{ url('menu')}}">My team</a>
                         </li>
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('sales/create')}}">Post Sale</a>
@@ -74,7 +74,7 @@
                             <a class="nav-link" href="{{ url('team') }}">{{ __('Create New Member') }}</a>   
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('team/$user->id')}}">My team</a>
+                            <a class="nav-link" href="{{ url('team/'.auth()->user()->id)}}">My team</a>
                         </li>
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('sales/create')}}">Post Sale</a>
