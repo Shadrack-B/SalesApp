@@ -54,4 +54,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function parent(){
         return $this->belongsTo('App\User', 'parent_id');
     }
+    
+    public function usertype(){
+        return $this->belongsTo('App\Usertype', 'user_type_id');
+    }
+
+    public function commissions(){
+        return $this->hasMany('App\Commission', 'user_id');
+    }
 }
