@@ -10,14 +10,14 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     {{-- custom style --}}
-    <style>
+    {{-- <style>
             table {
               font-family: arial, sans-serif;
               border-collapse: collapse;
@@ -33,11 +33,12 @@
             tr:nth-child(even) {
               background-color: #dddddd;
             }
-    </style>
+    </style> --}}
 
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('style')
 </head>
 <body>
     <div id="app">
@@ -63,7 +64,7 @@
                             <a class="nav-link" href="{{ url('team') }}">{{ __('Create New Member') }}</a>   
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('menu')}}">My team</a>
+                            <a class="nav-link" href="{{ url('show/team')}}">My team</a>
                         </li>
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('sales/create')}}">Post Sale</a>
@@ -135,5 +136,7 @@
             @yield('content')
         </main>
     </div>
+    
+    @yield('javascript')
 </body>
 </html>
