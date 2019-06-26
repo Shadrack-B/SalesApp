@@ -15,6 +15,27 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
+                    
+                    <div class="panel-">
+                        <table class="table">
+                            <thead>
+                                <th>Date</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Commission</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($sales as $sale)
+                                <td>{{$sale->created_at}}</td>
+                                <td>{{$sale->product}}</td>
+                                <td>{{$sale->price}}</td>
+                                <td>{{$value->where('sales_id', $sale->id)}}</td>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
                    
                 </div>
             </div>
