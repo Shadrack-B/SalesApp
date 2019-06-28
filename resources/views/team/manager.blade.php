@@ -59,7 +59,44 @@
                                                         {{$sale->salesrep()->value ?? 0}}<br>
                                                     @endforeach
                                                 </td>
+
                                             </tr>
+                                            @foreach ($child->children as $grand)
+                                            @php
+                                            if ($grand->sales->count()==0) {
+                                                $salesCount = 1;
+                                            } else {
+                                                $salesCount = $grand->sales->count();
+                                            }
+                                            @endphp
+                                                <tr>
+                                                    <td rowspan="{{$salesCount}}">{{ $grand->usertype->user_type }}</td>
+                                                    <td rowspan="{{$salesCount}}">{{ $grand->email }}</td>
+                                                    <td rowspan="{{$salesCount}}">{{ $grand->name }}</td>
+                                                    <td rowspan="{{$salesCount}}">
+                                                        @foreach ($grand->teams as $team)
+                                                            {{$team->name}}
+                                                        @endforeach
+                                                    </td>
+                                                    <td>@foreach ($grand->sales as $sale){{ $sale->product }}<br>@endforeach</td>
+                                                    <td>@foreach ($grand->sales as $sale)ksh{{ $sale->price }}<br>@endforeach</td>
+                                                    <td>
+                                                        @foreach ($grand->sales as $sale)
+                                                            {{$sale->manager()->value ?? 0}}<br>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                            @foreach ($grand->sales as $sale)
+                                                                {{$sale->supervisor()->value ?? 0}}<br>
+                                                            @endforeach
+                                                    </td>
+                                                    <td>
+                                                        @foreach ($grand->sales as $sale)
+                                                            {{$sale->salesrep()->value ?? 0}}<br>
+                                                        @endforeach
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                  </tbody>
                             </table> 

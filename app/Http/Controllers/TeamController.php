@@ -75,8 +75,10 @@ class TeamController extends Controller
     public function show($id=null)
     {
         $user=auth()->user();
-        
-        return view('team/manager/manager', compact('user'));
+        if ($user->user_type_id=1) {
+            return view('team/manager', compact('user'));
+        }
+        return view('team/supervisor', compact('user'));
     }
 
     /**
