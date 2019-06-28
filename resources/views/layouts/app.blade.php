@@ -57,6 +57,9 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                         @if (auth()->user()->user_type_id==1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home')}}">Home</a>
+                        </li>
                         <li class="nav-item"> 
                             <a class="nav-link" href="{{ url('team/create') }}">{{ __('Create team') }}</a>   
                         </li>
@@ -71,17 +74,23 @@
                         </li>
                         @endif
                         @if (auth()->user()->user_type_id==2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home')}}">Home</a>
+                        </li>
                         <li class="nav-item"> 
                             <a class="nav-link" href="{{ url('team') }}">{{ __('Create New Member') }}</a>   
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('team/'.auth()->user()->id)}}">My team</a>
+                            <a class="nav-link" href="{{ url('show/team')}}">My team</a>
                         </li>
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('sales/create')}}">Post Sale</a>
                         </li>
                         @endif
                         @if (auth()->user()->user_type_id==3)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home')}}">Home</a>
+                        </li>
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('sales/create')}}">Post Sale</a>
                         </li>

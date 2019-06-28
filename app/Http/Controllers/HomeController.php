@@ -24,11 +24,7 @@ class HomeController extends Controller
     public function index()
     {   
         $sales=auth()->user()->sales;
-        $commissions=auth()->user()->commissions;
-        foreach ($commissions as $commission) {
-            $value=$commission->value;
-            return $value;
-        }
-        return view('home', compact('sales', 'value'));
+        
+        return view('home', compact('sales'));
     }
 }
